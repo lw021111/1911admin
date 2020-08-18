@@ -18,5 +18,5 @@ Route::get('/', function () {
 Route::prefix('admin')->group(function(){
 	Route::get('/','Admin\IndexController@index');
 	Route::get('/create','Admin\IndexController@create');
-	
+	Route::get('/createdo','Admin\IndexController@createdo');
 });
