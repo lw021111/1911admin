@@ -14,7 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
+//a
 Route::prefix('admin')->group(function(){
 	Route::get('/','Admin\IndexController@index');
 	Route::get('/create','Admin\IndexController@create');
