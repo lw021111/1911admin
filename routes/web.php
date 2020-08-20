@@ -14,3 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+# 权限节点添加
+Route::any('/powerNode/add' , 'Admin\PowerNodeController@powerNodeAdd' );
+
+# 权限列表
+Route::any('/powerNode/list' , 'Admin\PowerNodeController@powerNodeList' );
+
+Route::prefix('admin')->group(function(){
+   Route::get('index','Admin\AdminController@index');
+});
