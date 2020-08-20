@@ -14,6 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
 # 权限节点添加
 Route::any('/powerNode/add' , 'Admin\PowerNodeController@powerNodeAdd' );
 
@@ -23,3 +24,11 @@ Route::any('/powerNode/list' , 'Admin\PowerNodeController@powerNodeList' );
 Route::prefix('admin')->group(function(){
    Route::get('index','Admin\AdminController@index');
 });
+
+//a
+Route::prefix('admin')->group(function(){
+	Route::get('/','Admin\IndexController@index');
+	Route::get('/create','Admin\IndexController@create');
+	Route::get('/createdo','Admin\IndexController@createdo');
+});
+
