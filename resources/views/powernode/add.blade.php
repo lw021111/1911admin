@@ -1,7 +1,8 @@
 @include('public/header')
 @include('public/left')
 <div style="margin-top: 10px"></div>
-<form class="layui-form" action="">
+<form class="layui-form" action="/powerNode/add" method="post">
+
     <div class="layui-form-item">
         <label class="layui-form-label">节点的名称</label>
         <div class="layui-input-inline">
@@ -34,7 +35,7 @@
     </div>
     <div class="layui-form-item">
         <div class="layui-input-block">
-            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+            <button class="layui-btn" lay-submit lay-filter="formDemo" type="submit">立即提交</button>
             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
         </div>
     </div>
@@ -47,32 +48,32 @@
         var form = layui.form;
         $ = layui.jquery;
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+//        $.ajaxSetup({
+//            headers: {
+//                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//            }
+//        });
         //监听提交
-        form.on('submit(formDemo)', function(data){
-            layer.msg(JSON.stringify(data.field));
+        {{--form.on('submit(formDemo)', function(data){--}}
+            {{--layer.msg(JSON.stringify(data.field));--}}
 
-            $.ajax({
-                url:'{{url('/powerNode/add')}}',
-                data:data.field,
-                type:'post',
-                dataType:'json',
-                success:function( json_info ){
-                    if( json_info.status == 200 ){
-                        alert('success');
-                    }else{
-                        alert('fail');
-                    }
-                }
-            })
+            {{--$.ajax({--}}
+                {{--url:'{{url('/powerNode/add')}}',--}}
+                {{--data:data.field,--}}
+                {{--type:'post',--}}
+                {{--dataType:'json',--}}
+                {{--success:function( json_info ){--}}
+                    {{--if( json_info.status == 200 ){--}}
+                        {{--alert('success');--}}
+                    {{--}else{--}}
+                        {{--alert('fail');--}}
+                    {{--}--}}
+                {{--}--}}
+            {{--})--}}
 
-            return false;
+            {{--return false;--}}
 
-        });
+        {{--});--}}
     });
 </script>
 @include('public/footer')

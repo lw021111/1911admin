@@ -38,15 +38,9 @@ class PowerNodeController extends CommonController
             $power_node_model -> ctime = time();
 
             if( $power_node_model -> save() ){
-                return [
-                    'status' => 200,
-                    'msg' => 'success'
-                ];
+             echo "<script>alert('添加成功');location='/powerNode/list'</script>";
             }else{
-                return [
-                    'status' => 1,
-                    'msg' => 'fail'
-                ];
+
             }
         }
 
@@ -58,8 +52,9 @@ class PowerNodeController extends CommonController
             [ 'status'  , '=' , 1 ]
         ];
 
-
+        //左侧列表查询
         $power_node_list = $power_node_model -> where( $where ) -> get();
+//        dd($power_node_list);
 
 //        dd( $power_node_list );
         return view('powernode/add' , [
@@ -70,42 +65,13 @@ class PowerNodeController extends CommonController
     /**
      * 权限节点的列表
      */
-    public function powerNodeList( Request $request )
-    {
-        if( $request -> ajax() )
-        {
-            $power_node_model = new PowerNodeModel();
+    public function powerNodeList( Request $request ){
 
-            $power_node_list = $power_node_model -> paginate( $request -> get('limit') );
+        $sql = PowerNodeModel::paginate(5);
 
-            $power_node_list = collect( $power_node_list ) -> toArray();
 
-            $count = $power_node_model -> count();
 
-            if( !empty($power_node_list['data']) )
-            {
-                foreach( $power_node_list['data'] as $k => $v  )
-                {
-                    $power_node_list['data'][$k]['create_date'] = date('Y-m-d H:i:s' , $v['ctime']);
-                    if( $v['status'] == 1 )
-                    {
-                        $power_node_list['data'][$k]['status_desc'] = '正常' ;
-                    }else{
-                        $power_node_list['data'][$k]['status_desc'] = '已删除' ;
-                    }
-                }
-            }
-
-            $list = [
-                'code' => 0 ,
-                'msg' => 'success',
-                'count' => $count,
-                'data' =>$power_node_list['data']
-            ];
-            return $list;
-        }
-
-        return view('powernode.list');
+        return view('powernode.list',['sql'=>$sql]);
     }
 }
 
